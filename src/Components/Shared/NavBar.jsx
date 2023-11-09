@@ -34,7 +34,7 @@ const NavBar = () => {
     
     return (
       <div>
-        <div className="navbar bg-base-100 h-36 items-center w-4/5 mx-auto">
+        <div className="navbar bg-base-100 h-36 items-center w-4/5 mx-auto pt-4">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -60,7 +60,7 @@ const NavBar = () => {
                 {list}
               </ul>
             </div>
-            <Link className="btn btn-ghost normal-case text-xl w-2/3 md:w-4/5">
+            <Link className="normal-case  text-xl w-2/3 md:w-3/4">
               <img src={logo}></img>
             </Link>
           </div>
