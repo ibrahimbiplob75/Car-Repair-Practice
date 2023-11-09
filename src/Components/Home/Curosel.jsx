@@ -89,7 +89,7 @@ const Curosel = () => {
               </div>
             </div>
             <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
-              <a href="#slide2" className="btn btn-circle mr-5">
+              <a href="#slide2" className="btn btn-circle bg-red-700 text-white mr-5">
                 ❮
               </a>
               <a href="#slide4" className="btn btn-circle">

@@ -1,3 +1,4 @@
+import AboutUs from "./AboutUs";
 import Curosel from "./Curosel";
 
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
                 <div>
                     <Curosel></Curosel>
+                    <AboutUs></AboutUs>
                 </div>
         </div>
     );
