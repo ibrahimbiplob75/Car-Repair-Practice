@@ -1,11 +1,38 @@
 
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { ContextProvider } from "../../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const { signInWithemail } = useContext(ContextProvider);
 
-    const handleLogin=()=>{
 
+    const handleLogin=(event)=>{
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const email = data.get("email");
+        const password = data.get("password");
+        
+        signInWithemail(email, password)
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "You have Loged-in Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer: '<a href="#">Why do I have this issue?</a>',
+            });
+          });
     }
     return (
       <div>
@@ -21,12 +48,12 @@ const Login = () => {
               <form onSubmit={handleLogin} className="card-body">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">User name</span>
+                    <span className="label-text">Email</span>
                   </label>
                   <input
-                    type="text"
-                    placeholder="User name"
-                    name="user_name"
+                    type="email"
+                    placeholder="Email"
+                    name="email"
                     className="input input-bordered"
                     required
                   />

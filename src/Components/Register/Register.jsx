@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/login/login.svg'
+import { useContext } from 'react';
+import { ContextProvider } from '../../../AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 const Register = () => {
+
+  const { registerWithemail } = useContext(ContextProvider);
 
     const handleRegister=(event)=>{
         event.preventDefault();
@@ -13,6 +18,26 @@ const Register = () => {
         const photo = data.get("profile");
         const password=data.get("password");
         console.log(name, user_name,email,photo,password);
+
+        registerWithemail(email, password)
+          .then(() => {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "You have registered Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer: '<a href="#">Why do I have this issue?</a>',
+            });
+          });
+
     }
     return (
       <div>
