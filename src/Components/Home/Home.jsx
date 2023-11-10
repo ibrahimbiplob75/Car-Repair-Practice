@@ -1,5 +1,6 @@
 import AboutUs from "./AboutUs";
 import Curosel from "./Curosel";
+import Services from "./Services";
 
 
 
@@ -9,6 +10,7 @@ const Home = () => {
                 <div>
                     <Curosel></Curosel>
                     <AboutUs></AboutUs>
+                    <Services></Services>
                 </div>
         </div>
     );
