@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.svg'
+import { useContext } from "react";
+import { ContextProvider } from "../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
+import user_avatar from "../../assets/user.jpg"
 
 const NavBar = () => {
+  const { user, logout } = useContext(ContextProvider);
+  const logOut=()=>{
+    logout()
+      .then(() => {
+          Swal.fire({
+          title: "Success!",
+          text: "You Have Logged Out",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+      });
+  }
     const list = (
       <>
         <li>
@@ -34,8 +61,8 @@ const NavBar = () => {
     
     return (
       <div>
-        <div className="navbar bg-base-100 h-36 items-center w-4/5 mx-auto pt-4">
-          <div className="navbar-start">
+        <div className="navbar bg-base-100 h-36 items-center w-full mx-auto p-10">
+          <div className="navbar-start m-10">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg
@@ -70,41 +97,48 @@ const NavBar = () => {
 
           <div className="navbar-end">
             {/* cart */}
-            <div className="dropdown dropdown-end md:mr-2 lg:mr-4">
-              <label tabIndex={0} className="btn btn-ghost btn-circle">
-                <div className="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span className="badge badge-sm indicator-item">8</span>
-                </div>
-              </label>
-              <div
-                tabIndex={0}
-                className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-              >
-                <div className="card-body">
-                  <span className="font-bold text-lg">8 Items</span>
-                  <span className="text-info">Subtotal: $999</span>
-                  <div className="card-actions">
-                    <button className="btn btn-primary btn-block">
-                      View cart
-                    </button>
+            {user ? (
+              <div className="dropdown dropdown-end md:mr-2 lg:mr-4">
+                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                  <div className="indicator">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                    <span className="badge badge-sm indicator-item">8</span>
+                  </div>
+                </label>
+
+                <div
+                  tabIndex={0}
+                  className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+                >
+                  <div className="card-body">
+                    <span className="font-bold text-lg">8 Items</span>
+                    <span className="text-info">Subtotal: $999</span>
+                    <div className="card-actions">
+                      <Link to="/booking">
+                        <button className="btn btn-primary btn-block">
+                          View cart
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              " "
+            )}
 
             {/* search */}
             <button className="btn btn-ghost btn-circle md:mr-2 lg:mr-4">
@@ -125,7 +159,44 @@ const NavBar = () => {
             </button>
 
             {/* Appointment */}
+
             <button className="btn btn-outline btn-warning">Appointment</button>
+            {user ? (
+              <div className="dropdown dropdown-end ml-3">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    {user?.photo ? (
+                      <img src={user?.photo} />
+                    ) : (
+                      <img src={user_avatar} />
+                    )}
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <Link onClick={logOut}>Logout</Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="btn btn-outline btn-error ml-3">
+                  Log in
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

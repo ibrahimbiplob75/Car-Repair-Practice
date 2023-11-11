@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import slide1 from "../../assets/images/banner/2.jpg";
 import { useContext } from "react";
-import { ContextProvider } from "../../../AuthContext/AuthContext";
+import { ContextProvider } from "../../AuthContext/AuthContext";
 import Swal from "sweetalert2";
 
 const CheckOut = () => {
