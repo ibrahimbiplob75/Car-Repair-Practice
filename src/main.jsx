@@ -8,6 +8,7 @@ import Home from './Components/Home/Home.jsx'
 import Login from './Components/Login/Login.jsx';
 import Register from './Components/Register/Register.jsx';
 import AuthContext from '../AuthContext/AuthContext.jsx';
+import CheckOut from './Components/CheckOut/CheckOut.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       {
         path:"/register",
         element:<Register></Register>,
+      },
+      {
+        path:"/booking/:id",
+        element:<CheckOut></CheckOut>,
+        loader:({params})=>fetch(`http://localhost:5000/data/${params.id}`),
       }
 
     ]
