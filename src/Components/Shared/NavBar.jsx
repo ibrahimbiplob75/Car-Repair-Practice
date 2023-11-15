@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../../AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import user_avatar from "../../assets/user.jpg"
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+
 
 const NavBar = () => {
   const { user, logout } = useContext(ContextProvider);
@@ -14,15 +14,15 @@ const NavBar = () => {
 
   const url = `http://localhost:5000/booking?email=${user?.email}`;
   useEffect(() => {
-    fetch(url)
+    fetch(url,{credentials:"include"})
       .then((res) => res.json())
       .then((data) => {
-        const Price = data.reduce(
-          (acc, booking) => acc + booking.price,
-          0
-        );
+        // const Price = data.reduce(
+        //   (acc, booking) => acc + booking.price,
+        //   0
+        // );
         let totalPrice =0;
-        totalPrice + Price;
+        // totalPrice + Price;
         setBooked(data);
         setSubtotal(totalPrice);
         setDataFetched(true); // Set dataFetched to true after successful fetch
@@ -125,7 +125,7 @@ const NavBar = () => {
           </div>
 
           <div className="navbar-end">
-            <PrivateRoute>
+         
               {/* cart */}
               {user ? (
                 <div className="dropdown dropdown-end md:mr-2 lg:mr-4">
@@ -176,7 +176,7 @@ const NavBar = () => {
               ) : (
                 " "
               )}
-            </PrivateRoute>
+           
             {/* search */}
             <button className="btn btn-ghost btn-circle md:mr-2 lg:mr-4">
               <svg

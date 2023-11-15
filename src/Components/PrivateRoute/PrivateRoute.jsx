@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { ContextProvider } from "../../AuthContext/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import propTypes from "prop-types"
 
 
 const PrivateRoute = ({children}) => {
     const {user,loader}=useContext(ContextProvider);
+    const location=useLocation();
+    
     if(loader){
        
          <div className="text-center m-20">

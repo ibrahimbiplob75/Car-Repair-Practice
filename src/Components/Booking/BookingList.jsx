@@ -2,14 +2,32 @@ import { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../../AuthContext/AuthContext";
 import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 const BookingList = () => {
     const {user}=useContext(ContextProvider);
     const [booked,setBooked]=useState([]);
 
-    const handleBookingConfirm=()=>{
-      console.log("ok");
+    const handleBookingConfirm=(_id)=>{
+      fetch(`http://localhost:5000/booking/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ status: "confirm" }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.modifiedCount > 0) {
+            const remaining = booked.filter((book) => book._id !== _id);
+            const updated = booked.filter((book) => book._id === _id);
+            updated.status = "confirm";
+            const newBooked = [updated, ...remaining];
+            setBooked(newBooked);
+          }
+        });
     }
 
      const handleDelete = (_id) => {
@@ -46,12 +64,15 @@ const BookingList = () => {
 
     const url = `http://localhost:5000/booking?email=${user.email}`;
     useEffect(()=>{
-        fetch(url)
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            setBooked(data)
-        });
+      axios.get(url, { withCredentials: true }).then((res) => {
+        setBooked(res.data);
+      });
+        // fetch(url)
+        // .then(res=>res.json())
+        // .then(data=>{
+        //     console.log(data);
+        //     setBooked(data)
+        // });
     },[url]);
     
     return (

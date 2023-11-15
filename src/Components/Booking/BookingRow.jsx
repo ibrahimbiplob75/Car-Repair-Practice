@@ -53,10 +53,17 @@ const BookingRow = ({ booking, handleDelete, handleBookingConfirm }) => {
   );
 };
 
-BookingRow.propTypes= {
-  booking: PropTypes.object,
-  handleDelete:PropTypes.func,
-  handleBookingConfirm:PropTypes.func,
+BookingRow.propTypes = {
+  booking: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    img: PropTypes.string,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleBookingConfirm: PropTypes.func.isRequired,
 };
 
 export default BookingRow;
