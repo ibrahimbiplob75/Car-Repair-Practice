@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../../AuthContext/AuthContext";
 import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
-import axios from "axios";
+import UseAxiosSecure from "../../AxiosSecure/UseAxiosSecure";
 
 
 const BookingList = () => {
     const {user}=useContext(ContextProvider);
     const [booked,setBooked]=useState([]);
+    const AxiosSecure = UseAxiosSecure();
 
     const handleBookingConfirm=(_id)=>{
       fetch(`http://localhost:5000/booking/${_id}`, {
@@ -62,9 +63,10 @@ const BookingList = () => {
        });
      };
 
-    const url = `http://localhost:5000/booking?email=${user.email}`;
+    //const url = `http://localhost:5000/booking?email=${user.email}`;
+    const url = `/booking?email=${user.email}`;
     useEffect(()=>{
-      axios.get(url, { withCredentials: true }).then((res) => {
+      AxiosSecure.get(url).then((res) => {
         setBooked(res.data);
       });
         // fetch(url)
@@ -73,7 +75,7 @@ const BookingList = () => {
         //     console.log(data);
         //     setBooked(data)
         // });
-    },[url]);
+    },[url,AxiosSecure]);
     
     return (
       <div>
