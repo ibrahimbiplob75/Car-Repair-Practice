@@ -11,7 +11,7 @@ const BookingList = () => {
     const AxiosSecure = UseAxiosSecure();
 
     const handleBookingConfirm=(_id)=>{
-      fetch(`http://localhost:5000/booking/${_id}`, {
+      fetch(`https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/booking/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -42,7 +42,7 @@ const BookingList = () => {
          confirmButtonText: "Yes, delete it!",
        }).then((result) => {
          if (result.isConfirmed) {
-           fetch(`http://localhost:5000/booking/${_id}`, {
+           fetch(`https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/booking/${_id}`, {
              method: "DELETE",
            })
              .then((res) => res.json())
@@ -63,7 +63,7 @@ const BookingList = () => {
        });
      };
 
-    //const url = `http://localhost:5000/booking?email=${user.email}`;
+    //const url = `https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/booking?email=${user.email}`;
     const url = `/booking?email=${user.email}`;
     useEffect(()=>{
       AxiosSecure.get(url).then((res) => {

@@ -12,7 +12,7 @@ const NavBar = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [dataFetched, setDataFetched] = useState(false);
 
-  const url = `http://localhost:5000/booking?email=${user?.email}`;
+  const url = `https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/booking?email=${user?.email}`;
   useEffect(() => {
     fetch(url,{credentials:"include"})
       .then((res) => res.json())

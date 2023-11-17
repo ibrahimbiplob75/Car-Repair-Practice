@@ -27,7 +27,7 @@ const CheckOut = () => {
         }
         console.log(booking_order);
 
-        fetch("http://localhost:5000/booking", {
+        fetch("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/booking", {
           method: "POST",
           headers: {
             "content-type": "application/json",

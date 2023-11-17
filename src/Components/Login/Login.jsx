@@ -29,7 +29,7 @@ const Login = () => {
               timer: 1500,
             });
             const user={email};
-            axios.post("http://localhost:5000/jwt",user,{withCredentials:true})
+            axios.post("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/jwt",user,{withCredentials:true})
             .then(res=>{
                 console.log(res.data);
                 if(res.data.success){

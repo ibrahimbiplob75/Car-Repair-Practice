@@ -45,7 +45,7 @@ const AuthContext = ({children}) => {
     //       if(CurrentUser){
             
     //         axios
-    //           .post("http://localhost:5000/jwt", loggerUser, {
+    //           .post("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/jwt", loggerUser, {
     //             withCredentials: true,
     //           })
     //           .then((res) => {
@@ -56,7 +56,7 @@ const AuthContext = ({children}) => {
         
     //     else{
     //       axios
-    //         .post("http://localhost:5000/logout", loggerUser, {
+    //         .post("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/logout", loggerUser, {
     //           withCredentials: true,
     //         })
     //         .then((res) => {
@@ -79,7 +79,7 @@ const AuthContext = ({children}) => {
         // if user exists then issue a token
         if (currentUser) {
           axios
-            .post("http://localhost:5000/jwt", loggedUser, {
+            .post("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/jwt", loggedUser, {
               withCredentials: true,
             })
             .then((res) => {
@@ -88,7 +88,7 @@ const AuthContext = ({children}) => {
         } 
         else {
           axios
-            .post("http://localhost:5000/logout", loggedUser, {
+            .post("https://car-service-server-ctf7bl1pp-md-ibrahim-biplobs-projects.vercel.app/logout", loggedUser, {
               withCredentials: true,
             })
             .then((res) => {
